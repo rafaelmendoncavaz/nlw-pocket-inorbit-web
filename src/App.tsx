@@ -1,31 +1,22 @@
-import { Dialog, DialogContent } from "./components/ui/dialog"
-import { ComponentRadio } from "./components/radio/radio"
-import { ComponentDialogButtons } from "./components/dialog/dialog-buttons"
-import { ComponentDialogInput } from "./components/dialog/dialog-input"
-import { ComponentDialogHeader } from "./components/dialog/dialog-header"
+import { Dialog } from "./components/ui/dialog"
 import { Home } from "./pages/home/home"
 import { Summary } from "./pages/summary/summary"
+import { useQuery } from "@tanstack/react-query"
+import { getSummary } from "./requests/get-summary"
+import { CreateGoal } from "./components/create-goal/create-goal"
 
 function App() {
+  const { data } = useQuery({
+    queryKey: ["summary"],
+    queryFn: getSummary,
+    staleTime: 1000 * 60,
+  })
+
   return (
     <Dialog>
-      {/* <Home /> */}
-      <Summary />
+      {data?.total && data.total > 0 ? <Summary /> : <Home />}
 
-      <DialogContent>
-        <div className="flex flex-col gap-6 h-full">
-          <ComponentDialogHeader />
-
-          <form className="flex-1 flex flex-col justify-between">
-            <div className="flex flex-col gap-6">
-              <ComponentDialogInput />
-              <ComponentRadio />
-            </div>
-
-            <ComponentDialogButtons />
-          </form>
-        </div>
-      </DialogContent>
+      <CreateGoal />
     </Dialog>
   )
 }
