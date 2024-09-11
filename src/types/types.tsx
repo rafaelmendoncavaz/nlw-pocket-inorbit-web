@@ -7,12 +7,29 @@ export interface TypeSummary {
   goalsPerDay: GoalsPerDay
 }
 
+export interface SummaryHeaderProps {
+  firstDayOfWeek: string
+  lastDayOfWeek: string
+}
+
+export interface SummaryContextProps {
+  completed: number
+  total: number
+  percentage: number
+}
+
 export type TypePendingGoals = {
   id: string
   title: string
   desiredWeeklyFrequency: number
   completionCount: number
 }[]
+
+export type TypeGoal = {
+  id?: string
+  title: string
+  completedAt: string
+}
 
 export type GoalsPerDay = Record<
   string,
