@@ -26,7 +26,7 @@ export type TypePendingGoals = {
 }[]
 
 export type TypeGoal = {
-  id?: string
+  id: string
   title: string
   completedAt: string
 }

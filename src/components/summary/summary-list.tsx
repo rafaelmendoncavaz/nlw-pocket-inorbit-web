@@ -8,6 +8,7 @@ export function SummaryList({ goals }: GoalsPerDay) {
         return (
           <SummaryCard
             key={goal.id}
+            id={goal.id}
             title={goal.title}
             completedAt={goal.completedAt}
           />

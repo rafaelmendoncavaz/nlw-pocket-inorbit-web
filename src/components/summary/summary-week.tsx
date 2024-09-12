@@ -3,8 +3,10 @@ import { SummaryList } from "./summary-list"
 import type { TypeSummary } from "../../types/types"
 
 export function SummaryWeek({ completed, total, goalsPerDay }: TypeSummary) {
+  if (!goalsPerDay) return
+
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 overflow-hidden scrollbar-hidden overflow-y-auto max-h-[500px]">
       <h2 className="text-xl font-medium">Sua semana</h2>
       {Object.entries(goalsPerDay).map(([date, goals]) => {
         const weekDay = dayjs(date).format("dddd")
